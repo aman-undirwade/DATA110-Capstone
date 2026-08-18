@@ -4,25 +4,30 @@
 **Aman Undirwade**
 
 ## Course Portfolio
-This repository is organized as the DATA110 machine-learning portfolio/capstone repository. It contains the existing aircraft-engine predictive-maintenance project plus a structured set of course lab/practice implementations covering the major topics repeatedly taught and practiced in class.
+This repository is organized as the DATA110 machine-learning portfolio/capstone repository. It contains the aircraft-engine predictive-maintenance capstone plus course lab/practice implementations.
 
-## Existing Capstone Project
-The capstone studies early aircraft-engine failure detection using NASA C-MAPSS FD004. It compares Logistic Regression, Gaussian Naive Bayes, KNN, Decision Tree and Random Forest, uses engine-aware validation, evaluates warning horizons, and documents the selected Random Forest operating point.
+## Capstone Project
+The capstone studies early aircraft-engine failure detection using NASA C-MAPSS FD004. It compares Logistic Regression, Gaussian Naive Bayes, KNN, Decision Tree and Random Forest, uses engine-aware validation, evaluates warning horizons, selects a cost-sensitive operating point, evaluates the official test engines, and documents SHAP-based interpretation.
 
-## Course/Lab Coverage
-The `labs/` folder now contains compact, runnable practice implementations for:
+## Executable Capstone Notebook
+The main presentation/viva implementation is:
 
-- Python + end-to-end ML workflow
-- Logistic Regression
-- K-Nearest Neighbors (KNN)
-- Decision Tree
-- Support Vector Machine (SVM)
-- K-Means clustering
-- Hierarchical/Agglomerative clustering
-- PCA
-- ANN fundamentals and weight update/backpropagation concepts
-- NLP text preprocessing
-- Exam numerical practice for K-Means, KNN, Decision Tree, PCA, ANN and SVM
+`notebooks/Aman_Undirwade_DATA110_Capstone_Predictive_Maintenance.ipynb`
+
+The notebook is designed to be opened in Jupyter Notebook, JupyterLab, VS Code or Google Colab after the FD004 raw files are placed in `data/raw/`. It imports the reusable implementation from `src/` and walks through the complete ML pipeline step by step.
+
+### Notebook workflow
+1. Load and inspect NASA C-MAPSS FD004
+2. Construct RUL for training and official test trajectories
+3. Build 10/20/30/50-cycle warning targets
+4. Perform engine-level validation to reduce trajectory leakage
+5. Compare five DATA110 classical ML algorithms
+6. Select the 50-cycle Random Forest configuration
+7. Select the probability threshold using an illustrative 5:1 missed-failure cost
+8. Evaluate the official test engines
+9. Perform error analysis
+10. Explain the final model with SHAP
+11. Export reproducible result tables
 
 ## Repository Structure
 
@@ -33,42 +38,40 @@ DATA110-Capstone/
 ├── data/
 │   └── README.md
 ├── notebooks/
-│   └── README.md
+│   ├── README.md
+│   └── Aman_Undirwade_DATA110_Capstone_Predictive_Maintenance.ipynb
 ├── src/
 │   ├── predictive_maintenance.py
 │   └── run_experiment.py
 ├── labs/
-│   ├── README.md
-│   ├── 01_python_ml_template.py
-│   ├── 02_classification_algorithms.py
-│   ├── 03_clustering_and_pca.py
-│   ├── 04_ann_and_backpropagation.py
-│   ├── 05_nlp_text_preprocessing.py
-│   └── 06_exam_numerical_practice.md
 ├── results/
 ├── figures/
 ├── assignments/
 └── intermediate/
 ```
 
-## Important academic-integrity note
-The lab files in this repository are practice implementations/templates built from the course topics. They do **not** claim to be original historical submissions unless an actual submitted lab was already present in the repository. Dataset-specific labs should be run with the dataset supplied by the course before submission.
+## Data
+The raw NASA C-MAPSS FD004 benchmark is intentionally not redistributed in this repository. See `data/README.md` and the notebook for placement instructions.
 
-## Running the Capstone
+## Running the capstone
 
 ```bash
 pip install -r requirements.txt
 python src/run_experiment.py --data-dir data/raw --dataset FD004
 ```
 
-The raw NASA benchmark is not redistributed in this repository. See `data/README.md` for placement instructions.
+Or open the notebook under `notebooks/` and execute the cells sequentially.
 
-## GitHub Exam Checklist
-Before the exam, verify that:
+## Academic-integrity / reproducibility note
+The capstone implementation is intended to be understood and explained during the viva. The report describes a methodological, reproducible benchmark rather than a claim of a new ML algorithm. The FD004 benchmark is simulated and should not be interpreted as certified operational aircraft-maintenance evidence.
+
+## GitHub checklist
+Before submission, verify that:
 
 - the repository is public and opens correctly;
-- the capstone project is visible;
-- the `labs/` folder is visible;
-- Python/ML, classification, clustering/PCA, ANN, NLP and numerical-practice files are present;
-- actual course-submitted lab files are added if they were submitted separately;
+- the capstone notebook is visible and readable;
+- `src/` contains the reusable implementation;
+- `requirements.txt` contains the required Python packages;
+- raw NASA data are kept out of the repository;
+- the report/PPTX/video are submitted through the required course channel if requested;
 - no secrets, API keys, passwords or private credentials are committed.
