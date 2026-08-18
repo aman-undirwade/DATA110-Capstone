@@ -1,22 +1,28 @@
 # DATA110 Capstone — Aircraft Engine Predictive Maintenance
 
-## Project Overview
-This repository contains the DATA110 advanced project on early aircraft-engine failure detection using NASA's C-MAPSS FD004 dataset. The project reframes predictive maintenance as a binary early-warning classification problem and compares classical machine-learning models taught in DATA110.
+## Student
+**Aman Undirwade**
 
-The central research question is: **How early can an engine-failure warning be generated while keeping missed failures acceptably low and controlling false alarms?**
+## Course Portfolio
+This repository is organized as the DATA110 machine-learning portfolio/capstone repository. It contains the existing aircraft-engine predictive-maintenance project plus a structured set of course lab/practice implementations covering the major topics repeatedly taught and practiced in class.
 
-## Advanced Project Requirements Addressed
-- Problem formulation and objectives
-- NASA C-MAPSS FD004 data preparation
-- Engine-aware validation to reduce leakage
-- Feature engineering for multivariate sensor trajectories
-- Comparison of Logistic Regression, Gaussian Naive Bayes, KNN, Decision Tree, and Random Forest
-- Explicit warning-horizon comparison: 10, 20, 30, and 50 cycles
-- ROC-AUC, PR-AUC, precision, recall, and F1 evaluation
-- Cost-sensitive threshold selection
-- Official FD004 test evaluation
-- Random Forest explainability with SHAP
-- Reproducible code and documentation
+## Existing Capstone Project
+The capstone studies early aircraft-engine failure detection using NASA C-MAPSS FD004. It compares Logistic Regression, Gaussian Naive Bayes, KNN, Decision Tree and Random Forest, uses engine-aware validation, evaluates warning horizons, and documents the selected Random Forest operating point.
+
+## Course/Lab Coverage
+The `labs/` folder now contains compact, runnable practice implementations for:
+
+- Python + end-to-end ML workflow
+- Logistic Regression
+- K-Nearest Neighbors (KNN)
+- Decision Tree
+- Support Vector Machine (SVM)
+- K-Means clustering
+- Hierarchical/Agglomerative clustering
+- PCA
+- ANN fundamentals and weight update/backpropagation concepts
+- NLP text preprocessing
+- Exam numerical practice for K-Means, KNN, Decision Tree, PCA, ANN and SVM
 
 ## Repository Structure
 
@@ -31,51 +37,38 @@ DATA110-Capstone/
 ├── src/
 │   ├── predictive_maintenance.py
 │   └── run_experiment.py
-├── results/
-│   ├── README.md
-│   └── reported_results.md
-├── figures/
-│   └── README.md
 ├── labs/
-│   └── README.md
+│   ├── README.md
+│   ├── 01_python_ml_template.py
+│   ├── 02_classification_algorithms.py
+│   ├── 03_clustering_and_pca.py
+│   ├── 04_ann_and_backpropagation.py
+│   ├── 05_nlp_text_preprocessing.py
+│   └── 06_exam_numerical_practice.md
+├── results/
+├── figures/
 ├── assignments/
-│   └── README.md
 └── intermediate/
-    └── README.md
 ```
 
-## Dataset
-NASA C-MAPSS is a simulated turbofan-engine run-to-failure benchmark. This project uses **FD004**, which contains multiple operating conditions and two degradation modes. The raw NASA ZIP is intentionally not committed because the repository should remain lightweight and reproducible.
+## Important academic-integrity note
+The lab files in this repository are practice implementations/templates built from the course topics. They do **not** claim to be original historical submissions unless an actual submitted lab was already present in the repository. Dataset-specific labs should be run with the dataset supplied by the course before submission.
 
-See `data/README.md` for the exact download and placement instructions.
-
-## Method
-
-1. Load the FD004 train/test trajectories and official RUL values.
-2. Add engine-cycle and trajectory information.
-3. Construct RUL-aware binary labels for four warning horizons.
-4. Create sensor-derived features while preserving engine identity.
-5. Split validation by engine rather than randomly mixing rows.
-6. Compare five classical classifiers.
-7. Rank models using ROC-AUC and PR-AUC and inspect operational metrics.
-8. Select the decision threshold using an illustrative 5:1 false-negative-to-false-positive cost ratio.
-9. Retrain the selected Random Forest on the complete FD004 training set.
-10. Evaluate once on the official test set.
-11. Use SHAP to interpret the final model when the optional dependency is installed.
-
-## Key Reported Result
-The final report selected a **50-cycle warning horizon** and a **0.10 probability threshold**. On the official FD004 test set, the reported Random Forest results were ROC-AUC **0.9738**, PR-AUC **0.9518**, precision **0.6475**, recall **0.9875**, and F1 **0.7822**. The confusion matrix contained 125 true negatives, 43 false positives, 1 false negative, and 79 true positives.
-
-These figures are documented in `results/reported_results.md`; the repository code is provided so the methodology can be reproduced and inspected rather than treating the reported numbers as hard-coded outputs.
-
-## Running the Project
+## Running the Capstone
 
 ```bash
 pip install -r requirements.txt
 python src/run_experiment.py --data-dir data/raw --dataset FD004
 ```
 
-The script expects the standard NASA files (`train_FD004.txt`, `test_FD004.txt`, and `RUL_FD004.txt`) under `data/raw/`.
+The raw NASA benchmark is not redistributed in this repository. See `data/README.md` for placement instructions.
 
-## Academic Integrity
-This repository is organized for the individual DATA110 capstone submission. The code and documentation are intended to make the methodology transparent and reproducible. The raw NASA benchmark is referenced rather than redistributed.
+## GitHub Exam Checklist
+Before the exam, verify that:
+
+- the repository is public and opens correctly;
+- the capstone project is visible;
+- the `labs/` folder is visible;
+- Python/ML, classification, clustering/PCA, ANN, NLP and numerical-practice files are present;
+- actual course-submitted lab files are added if they were submitted separately;
+- no secrets, API keys, passwords or private credentials are committed.
